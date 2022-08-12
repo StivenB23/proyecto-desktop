@@ -10,13 +10,17 @@ import java.sql.DriverManager;
  *
  * @author Aprendiz
  */
+
 public class Conexion {
-    public Connection con;
+    private static final String bbdd = "jdbc:mysql://localhost:3306/senasoft";
+    private static final String user = "root";
+    private static final String password = "";
+    private static Connection con;
     
-    public Connection connection(){
+    public static Connection connection(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/senasoft","root","");
+            con = DriverManager.getConnection(bbdd, user, password);
             System.out.println("CONEXIÓN EXITOSA");
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -24,7 +28,6 @@ public class Conexion {
         return con;
     }
     public static void main(String[] args) {
-        Conexion con =new Conexion();
-        con.connection(); 
+        Conexion.connection();
     }
 }
