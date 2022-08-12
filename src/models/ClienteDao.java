@@ -6,8 +6,8 @@ package models;
 
 /**
  *
- * @author Aprendiz
+ * @author andre
  */
-public class Cliente {
+public class ClienteDao {
     
 }
