@@ -17,6 +17,7 @@ public class ClienteView extends javax.swing.JFrame {
      */
     public ClienteView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
