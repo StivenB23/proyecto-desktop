@@ -66,6 +66,4 @@ public class ClienteVo {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
-    
-    
 }

@@ -3,25 +3,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package models;
-
 /**
  *
  * @author andre
  */
 public class CuentaVo {
+    private int IdCuenta;
     private int NumeroCuenta;
     private String Titular;
     private double Saldo;
     private String FechaApertura;
-    private int IdCuenta;
+    private int IdCliente;
     
     public CuentaVo(){}
 
-    public CuentaVo(int NumeroCuenta, String Titular, double Saldo, String FechaApertura, int IdCuenta) {
+    public CuentaVo(int IdCuenta, int NumeroCuenta, String Titular, double Saldo, String FechaApertura, int IdCliente) {
+        this.IdCuenta = IdCuenta;
         this.NumeroCuenta = NumeroCuenta;
         this.Titular = Titular;
         this.Saldo = Saldo;
         this.FechaApertura = FechaApertura;
+        this.IdCliente = IdCliente;
+    }
+
+    public int getIdCuenta() {
+        return IdCuenta;
+    }
+
+    public void setIdCuenta(int IdCuenta) {
         this.IdCuenta = IdCuenta;
     }
 
@@ -57,11 +66,11 @@ public class CuentaVo {
         this.FechaApertura = FechaApertura;
     }
 
-    public int getIdCuenta() {
-        return IdCuenta;
+    public int getIdCliente() {
+        return IdCliente;
     }
 
-    public void setIdCuenta(int IdCuenta) {
-        this.IdCuenta = IdCuenta;
+    public void setIdCliente(int IdCliente) {
+        this.IdCliente = IdCliente;
     }
 }
