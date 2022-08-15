@@ -61,6 +61,7 @@ public class CuentaDao {
                 cuentarow.setIdCuenta(resultset.getInt("idcuenta"));
                 cuentarow.setNumeroCuenta(resultset.getInt("numerocuenta"));
                 cuentarow.setTitular(resultset.getString("titular"));
+                cuentarow.setEstado(resultset.getBoolean("estado"));
                 cuentarow.setSaldo(resultset.getDouble("saldo"));
                 cuentarow.setFechaApertura(resultset.getString("fechaapertura"));
                 cuentarow.setIdCliente(resultset.getInt("idcliente"));

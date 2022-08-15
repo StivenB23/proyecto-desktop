@@ -4,6 +4,10 @@
  */
 package views;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jumbo170
@@ -100,7 +104,12 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButtonGestionarCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionarCuentasActionPerformed
         // TODO add your handling code here:
         super.setVisible(false);
-        CuentaView cuentaView = new CuentaView();
+        CuentaView cuentaView = null;
+        try {
+            cuentaView = new CuentaView();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         cuentaView.setVisible(true);
     }//GEN-LAST:event_jButtonGestionarCuentasActionPerformed
 

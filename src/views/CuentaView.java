@@ -6,7 +6,11 @@ package views;
 
 import java.awt.HeadlessException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import models.CuentaDao;
 import models.CuentaVo;
 
@@ -16,12 +20,37 @@ import models.CuentaVo;
  */
 public class CuentaView extends javax.swing.JFrame {
 
+    DefaultTableModel modelo;
+
     /**
      * Creates new form CuentaView
      */
-    public CuentaView() {
+    public CuentaView() throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
+        modelo = new DefaultTableModel();
+        this.listar();
+    }
+
+    void listar() throws SQLException {
+        Object[] cuenta = new Object[6];
+        modelo = (DefaultTableModel) jTableCuentas.getModel();
+        CuentaDao cuentaDao = new CuentaDao();
+        List<CuentaVo> cuentas = cuentaDao.list();
+        cuentas.stream().forEach(account -> {
+            cuenta[0] = account.getIdCuenta();
+            cuenta[1] = account.getNumeroCuenta();
+            cuenta[2] = account.getFechaApertura();
+            cuenta[3] = account.getTitular();
+            cuenta[4] = account.getSaldo();
+            if (account.isEstado() == true) {
+                cuenta[5] = "Activo";
+            } else {
+                cuenta[5] = "Inactivo";
+            }
+            modelo.addRow(cuenta);
+        });
+        jTableCuentas.setModel(modelo);
     }
 
     /**
@@ -48,7 +77,7 @@ public class CuentaView extends javax.swing.JFrame {
         jButtonCuenta = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableCuentas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
@@ -129,20 +158,17 @@ public class CuentaView extends javax.swing.JFrame {
         jComboBox1.setBorder(null);
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jTable1.setForeground(new java.awt.Color(0, 139, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCuentas.setForeground(new java.awt.Color(0, 139, 255));
+        jTableCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "#", "Cuenta", "Titular", "Fecha", "Saldo", "Estado", "Cliente"
+                "#", "Cuenta", "Titular", "Fecha", "Saldo", "Estado"
             }
         ));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 139, 255));
-        jScrollPane1.setViewportView(jTable1);
+        jTableCuentas.setSelectionForeground(new java.awt.Color(0, 139, 255));
+        jScrollPane1.setViewportView(jTableCuentas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,31 +256,52 @@ public class CuentaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFechaCuentaActionPerformed
 
     private void jButtonCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCuentaActionPerformed
-        // TODO add your handling code here:
-        registerAccount();
+        try {
+            // TODO add your handling code here:
+            registerAccount();
+        } catch (SQLException ex) {
+            Logger.getLogger(CuentaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonCuentaActionPerformed
 
     /**
      *
      */
-    public void registerAccount() {
-        int NumeroCuenta = Integer.parseInt(jTextFieldNumeroCuenta.getText());
-        String Titular = jTextFieldTitularCuenta.getText();
-        double Saldo = Double.parseDouble(jTextFieldSaldoCuenta.getText());
-        String FechaApertura = jTextFieldFechaCuenta.getText();
-        boolean Estado = true;
-        int idcliente = 1;
-
-        CuentaDao cuentadao = new CuentaDao();
-
-        CuentaVo cuenta = new CuentaVo(NumeroCuenta, Titular, Saldo, FechaApertura, Estado, idcliente);
-
-        try {
-            cuentadao.save(cuenta);
-            JOptionPane.showMessageDialog(null, "Registro");
-        } catch (SQLException e) {
-            System.out.println(e.toString());
+    void clearTable() {
+        for (int i = 0; i < jTableCuentas.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i = i - 1;
         }
+    }
+
+    public void registerAccount() throws SQLException {
+
+        if (!jTextFieldNumeroCuenta.getText().isEmpty()
+                && !jTextFieldTitularCuenta.getText().isEmpty()
+                && !jTextFieldSaldoCuenta.getText().isEmpty()
+                && !jTextFieldFechaCuenta.getText().isEmpty()) {
+            int NumeroCuenta = Integer.parseInt(jTextFieldNumeroCuenta.getText());
+            String Titular = jTextFieldTitularCuenta.getText();
+            double Saldo = Double.parseDouble(jTextFieldSaldoCuenta.getText());
+            String FechaApertura = jTextFieldFechaCuenta.getText();
+            boolean Estado = true;
+            int idCliente = 1;
+
+            CuentaDao cuentadao = new CuentaDao();
+
+            CuentaVo cuenta = new CuentaVo(NumeroCuenta, Titular, Saldo, FechaApertura, Estado, idCliente);
+
+            try {
+                cuentadao.save(cuenta);
+                JOptionPane.showMessageDialog(null, "Registro");
+                this.clearTable();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Los Campos no pueden estar vacios. Porfavor llenelos");
+        }
+        this.listar();
     }
 
     /**
@@ -287,7 +334,11 @@ public class CuentaView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CuentaView().setVisible(true);
+                try {
+                    new CuentaView().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CuentaView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -304,7 +355,7 @@ public class CuentaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCedula3;
     private javax.swing.JLabel jLabelCedula4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableCuentas;
     private javax.swing.JTextField jTextFieldFechaCuenta;
     private javax.swing.JTextField jTextFieldNumeroCuenta;
     private javax.swing.JTextField jTextFieldSaldoCuenta;
