@@ -7,11 +7,13 @@ package models;
 import java.sql.Connection;
 import config.Conexion;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +26,7 @@ public class CuentaDao {
     ResultSet resultset;
     String query = null;
     int root;
+    boolean success = false;
 
     public void save(CuentaVo cuenta) throws SQLException {
         query = "INSERT INTO `cuenta`(`numerocuenta`, `titular`, `estado`, `fechaapertura`, `saldo`, `idcliente`) VALUES (?,?,?,?,?,?)";
@@ -65,7 +68,7 @@ public class CuentaDao {
                 cuentarow.setSaldo(resultset.getDouble("saldo"));
                 cuentarow.setFechaApertura(resultset.getString("fechaapertura"));
                 cuentarow.setIdCliente(resultset.getInt("idcliente"));
-                
+
                 listaCuenta.add(cuentarow);
             }
             preparedstatement.close();
@@ -74,12 +77,43 @@ public class CuentaDao {
         } finally {
             con.close();
         }
-        return listaCuenta; 
+        return listaCuenta;
     }
-    
-    public void inactivar (int id) throws SQLException{
-        query = "UPDATE cuenta SET estado = 0 WHERE idcuenta = " + id;
-        
+
+    public boolean changeStatus(int numberAccount) throws SQLException {
+        query = "SELECT * FROM `cuenta` WHERE numerocuenta =" + numberAccount;
+        boolean status = false;
+        try {
+            con = Conexion.connection();
+            preparedstatement = con.prepareStatement(query);
+            resultset = preparedstatement.executeQuery(query);
+            while (resultset.next()) {
+                CuentaVo accountVo = new CuentaVo();
+                status = resultset.getBoolean("estado");
+                int account = resultset.getInt("numerocuenta");
+                if (account == numberAccount) {
+                    System.out.println(status);
+                    if (status == true) {
+                        inactivar(numberAccount);
+                    } else {
+                        activar(numberAccount);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "El número de cuenta no existe porfavor rectifiquelo");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("no se encontro el numero de cuenta" + numberAccount + e.getMessage());
+        } finally {
+            con.close();
+        }
+        preparedstatement.close();
+        return status;
+    }
+
+    public void inactivar(int numberAccount) throws SQLException {
+        query = "UPDATE cuenta SET estado = 0 WHERE numerocuenta = " + numberAccount;
+
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
@@ -91,10 +125,10 @@ public class CuentaDao {
             con.close();
         }
     }
-    
-    public void activar (int id) throws SQLException{
-        query = "UPDATE cuenta SET estado = 1 WHERE idcuenta = " + id;
-        
+
+    public void activar(int numberAccount) throws SQLException {
+        query = "UPDATE cuenta SET estado = 1 WHERE numerocuenta = " + numberAccount;
+
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
@@ -106,21 +140,22 @@ public class CuentaDao {
             con.close();
         }
     }
-    
-    public void update (int id, String titular, double saldo, String fechaapertura) throws SQLException{
-        query = "UPDATE cuenta SET titular = '"+ titular +"' saldo = '"+ saldo +"' fechaapertura = '"+ fechaapertura +"' WHERE idcuenta = " + id;
+
+    public void delete(int numberAccount) throws SQLException {
+        query = "Delete from cuenta WHERE numerocuenta = " + numberAccount;
+
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
             preparedstatement.executeUpdate();
             preparedstatement.close();
         } catch (Exception e) {
-            System.out.println("Fallamos" + e.getMessage());
+            System.out.println("No se pudo eliminar desde el dao" + e.getMessage());
         } finally {
             con.close();
         }
     }
-    
+
 //    public void deposit (int id, int saldo) throws SQLException{
 //        
 //        query = "UPDATE cuenta SET saldo = '"+ saldo +"' WHERE idcuenta = " + id;

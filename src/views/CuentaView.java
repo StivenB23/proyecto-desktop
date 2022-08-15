@@ -74,52 +74,72 @@ public class CuentaView extends javax.swing.JFrame {
         jTextFieldSaldoCuenta = new javax.swing.JTextField();
         jTextFieldTitularCuenta = new javax.swing.JTextField();
         jTextFieldFechaCuenta = new javax.swing.JTextField();
-        jButtonCuenta = new javax.swing.JButton();
+        jButtonDeleteAccount = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCuentas = new javax.swing.JTable();
         jButtonCuenta1 = new javax.swing.JButton();
+        jButtonChangeStatus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
         setName("Cuentas"); // NOI18N
         setResizable(false);
+        getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 139, 255));
         jLabel2.setText("Cuentas");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(427, 18, 160, 36);
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 139, 255));
         jLabel3.setText("Lista de Cuentas");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(651, 61, 192, 36);
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 139, 255));
         jLabel4.setText("Agregar Cuenta");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(150, 60, 200, 36);
 
         jLabelCedula.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabelCedula.setForeground(new java.awt.Color(0, 64, 222));
         jLabelCedula.setText("Número de Cuenta");
+        getContentPane().add(jLabelCedula);
+        jLabelCedula.setBounds(50, 109, 180, 36);
 
         jLabelCedula1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabelCedula1.setForeground(new java.awt.Color(0, 64, 222));
         jLabelCedula1.setText("Titular");
+        getContentPane().add(jLabelCedula1);
+        jLabelCedula1.setBounds(50, 190, 51, 36);
 
         jLabelCedula2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabelCedula2.setForeground(new java.awt.Color(0, 64, 222));
         jLabelCedula2.setText("Saldo");
+        getContentPane().add(jLabelCedula2);
+        jLabelCedula2.setBounds(50, 340, 46, 36);
 
         jLabelCedula3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabelCedula3.setForeground(new java.awt.Color(0, 64, 222));
         jLabelCedula3.setText("Fecha de apertura");
+        getContentPane().add(jLabelCedula3);
+        jLabelCedula3.setBounds(50, 264, 160, 36);
 
         jLabelCedula4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabelCedula4.setForeground(new java.awt.Color(0, 64, 222));
         jLabelCedula4.setText("id del Cliente");
+        getContentPane().add(jLabelCedula4);
+        jLabelCedula4.setBounds(50, 420, 104, 36);
 
         jTextFieldNumeroCuenta.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTextFieldNumeroCuenta.setForeground(new java.awt.Color(0, 139, 255));
         jTextFieldNumeroCuenta.setCaretColor(new java.awt.Color(0, 139, 255));
+        getContentPane().add(jTextFieldNumeroCuenta);
+        jTextFieldNumeroCuenta.setBounds(50, 151, 406, 34);
 
         jTextFieldSaldoCuenta.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTextFieldSaldoCuenta.setForeground(new java.awt.Color(0, 139, 255));
@@ -129,10 +149,14 @@ public class CuentaView extends javax.swing.JFrame {
                 jTextFieldSaldoCuentaActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldSaldoCuenta);
+        jTextFieldSaldoCuenta.setBounds(50, 380, 406, 34);
 
         jTextFieldTitularCuenta.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTextFieldTitularCuenta.setForeground(new java.awt.Color(0, 139, 255));
         jTextFieldTitularCuenta.setCaretColor(new java.awt.Color(0, 139, 255));
+        getContentPane().add(jTextFieldTitularCuenta);
+        jTextFieldTitularCuenta.setBounds(50, 224, 406, 34);
 
         jTextFieldFechaCuenta.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTextFieldFechaCuenta.setForeground(new java.awt.Color(0, 139, 255));
@@ -142,22 +166,28 @@ public class CuentaView extends javax.swing.JFrame {
                 jTextFieldFechaCuentaActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldFechaCuenta);
+        jTextFieldFechaCuenta.setBounds(50, 300, 406, 34);
 
-        jButtonCuenta.setBackground(new java.awt.Color(0, 222, 222));
-        jButtonCuenta.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jButtonCuenta.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonCuenta.setText("Cambiar estado");
-        jButtonCuenta.setBorder(null);
-        jButtonCuenta.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDeleteAccount.setBackground(new java.awt.Color(170, 0, 0));
+        jButtonDeleteAccount.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jButtonDeleteAccount.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonDeleteAccount.setText("Eliminar cuenta");
+        jButtonDeleteAccount.setBorder(null);
+        jButtonDeleteAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCuentaActionPerformed(evt);
+                jButtonDeleteAccountActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonDeleteAccount);
+        jButtonDeleteAccount.setBounds(630, 10, 160, 40);
 
         jComboBox1.setForeground(new java.awt.Color(0, 139, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "John", "Andres", "Stive" }));
         jComboBox1.setBorder(null);
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(50, 460, 410, 40);
 
         jTableCuentas.setForeground(new java.awt.Color(0, 139, 255));
         jTableCuentas.setModel(new javax.swing.table.DefaultTableModel(
@@ -171,6 +201,9 @@ public class CuentaView extends javax.swing.JFrame {
         jTableCuentas.setSelectionForeground(new java.awt.Color(0, 139, 255));
         jScrollPane1.setViewportView(jTableCuentas);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(508, 109, 469, 449);
+
         jButtonCuenta1.setBackground(new java.awt.Color(0, 139, 255));
         jButtonCuenta1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jButtonCuenta1.setForeground(new java.awt.Color(255, 255, 255));
@@ -181,97 +214,21 @@ public class CuentaView extends javax.swing.JFrame {
                 jButtonCuenta1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonCuenta1);
+        jButtonCuenta1.setBounds(50, 518, 410, 40);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(427, 427, 427)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(301, 301, 301)
-                        .addComponent(jLabel3)))
-                .addContainerGap(157, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 517, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldTitularCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelCedula3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldFechaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelCedula2)
-                                    .addComponent(jTextFieldSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelCedula4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(23, 23, 23))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(60, 60, 60)
-                    .addComponent(jButtonCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(530, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jTextFieldNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jTextFieldTitularCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
-                .addComponent(jLabelCedula3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jTextFieldFechaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jLabelCedula2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jTextFieldSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jLabelCedula4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(554, Short.MAX_VALUE)
-                    .addComponent(jButtonCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(32, 32, 32)))
-        );
+        jButtonChangeStatus.setBackground(new java.awt.Color(0, 222, 222));
+        jButtonChangeStatus.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jButtonChangeStatus.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonChangeStatus.setText("Cambiar estado");
+        jButtonChangeStatus.setBorder(null);
+        jButtonChangeStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangeStatusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonChangeStatus);
+        jButtonChangeStatus.setBounds(810, 10, 170, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -284,18 +241,42 @@ public class CuentaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFechaCuentaActionPerformed
 
-    private void jButtonCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCuentaActionPerformed
+    private void jButtonDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteAccountActionPerformed
+        int inputNumberAccount = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de cuenta para eliminarla", null));
+        try{
+            CuentaDao cuentaDao = new CuentaDao();
+            cuentaDao.delete(inputNumberAccount);
+            this.clearTable();
+            this.listar();
+        }catch(Exception e){
+            System.out.print(e);
+        }
+    }//GEN-LAST:event_jButtonDeleteAccountActionPerformed
+
+    private void jButtonCuenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCuenta1ActionPerformed
+        // TODO add your handling code here:
         try {
             // TODO add your handling code here:
             registerAccount();
         } catch (SQLException ex) {
             Logger.getLogger(CuentaView.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButtonCuentaActionPerformed
-
-    private void jButtonCuenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCuenta1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCuenta1ActionPerformed
+
+    private void jButtonChangeStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangeStatusActionPerformed
+        // TODO add your handling code here:
+        int inputNumberAccount = Integer.parseInt(JOptionPane.showInputDialog("Porfavor Ingrese el número de cuenta", null));
+        System.out.println(inputNumberAccount);
+        CuentaDao cuentaDao = new CuentaDao();
+        try {
+            cuentaDao.changeStatus(inputNumberAccount);
+            this.clearTable();
+            this.listar();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "El número de cuenta no existe");
+            Logger.getLogger(CuentaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonChangeStatusActionPerformed
 
     /**
      *
@@ -377,8 +358,9 @@ public class CuentaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCuenta;
+    private javax.swing.JButton jButtonChangeStatus;
     private javax.swing.JButton jButtonCuenta1;
+    private javax.swing.JButton jButtonDeleteAccount;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
