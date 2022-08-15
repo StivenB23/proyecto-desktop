@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -27,18 +28,19 @@ public class ClienteDao {
     int root;
 
     public void save(ClienteVo cliente) throws SQLException {
-        query = "INSERT INTO `cliente`(`idcliente`, `cedulacliente`, `estado`, `nombre`, `telefono`) VALUES VALUES (?,?,?,?,?)";
+        query = "INSERT INTO `cliente`(`cedulacliente`, `estado`, `nombre`, `telefono`) VALUES (?, ?, ?, ?)";
 
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
             preparedstatement.setString(1, cliente.getCedulaCliente());
-            preparedstatement.setString(2, cliente.getNombre());
-            preparedstatement.setString(3, cliente.getTelefono());
+            preparedstatement.setBoolean(2, cliente.getEstado());
+            preparedstatement.setString(3, cliente.getNombre());
+            preparedstatement.setString(4, cliente.getTelefono());
             preparedstatement.executeUpdate();
             preparedstatement.close();
         } catch (Exception e) {
-            System.out.println("Fallamas" + e.getMessage());
+            System.out.println("Fallamos " + e.getMessage());
         } finally {
             con.close();
         }
@@ -57,7 +59,7 @@ public class ClienteDao {
                 ClienteVo clienterow = new ClienteVo();
 
                 clienterow.setIdcliente(resultset.getInt("idcliente"));
-                clienterow.setCedulaCliente(resultset.getString("cedulacliente "));
+                clienterow.setCedulaCliente(resultset.getString("cedulacliente"));
                 clienterow.setNombre(resultset.getString("nombre"));
                 clienterow.setTelefono(resultset.getString("telefono"));
                 clienterow.setEstado(resultset.getBoolean("estado"));
@@ -72,9 +74,33 @@ public class ClienteDao {
         }
         return listaCliente; 
     }
-    
-    public void inactivar (Integer id) throws SQLException{
-        query = "UPDATE cliente SET estado = 0 WHERE idcliente = " + id;
+    public boolean changeStatus(String cedula) throws SQLException {
+        query = "SELECT * FROM `cliente` WHERE cedulaCliente =" + cedula;
+        boolean status = false;
+        try {
+            con = Conexion.connection();
+            preparedstatement = con.prepareStatement(query);
+            resultset = preparedstatement.executeQuery(query);
+            while (resultset.next()) {
+                ClienteVo cedulaVo = new ClienteVo();
+                status = resultset.getBoolean("estado");
+                System.out.println(status);
+                if (status == true) {
+                    inactivar(cedula);
+                } else {
+                    activar(cedula);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("no se encontro la cedula" + cedula + e.getMessage());
+        } finally {
+            con.close();
+        }
+        preparedstatement.close();
+        return status;
+    }
+    public void inactivar (String cedula) throws SQLException{
+        query = "UPDATE cliente SET estado = 0 WHERE cedulaCliente = " + cedula;
         
         try {
             con = Conexion.connection();
@@ -88,8 +114,8 @@ public class ClienteDao {
         }
     }
     
-    public void activar (Integer id) throws SQLException{
-        query = "UPDATE cliente SET estado = 1 WHERE idcliente = " + id;
+    public void activar (String cedula) throws SQLException{
+        query = "UPDATE cliente SET estado = 1 WHERE cedulaCliente = " + cedula;
         
         try {
             con = Conexion.connection();
@@ -114,6 +140,35 @@ public class ClienteDao {
             System.out.println("Fallamos" + e.getMessage());
         } finally {
             con.close();
+        }
+    }
+    public void delete(String cedula) throws SQLException {
+        query = "Delete from cliente WHERE cedula = " + cedula;
+
+        try {
+            con = Conexion.connection();
+            preparedstatement = con.prepareStatement(query);
+            preparedstatement.executeUpdate();
+            preparedstatement.close();
+        } catch (Exception e) {
+            System.out.println("No se pudo eliminar desde el dao" + e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
+    public void consultClient(JComboBox cliente) throws SQLException {
+        query = "SELECT cedulacliente FROM cliente";
+
+        try {
+            con = Conexion.connection();
+            preparedstatement = con.prepareStatement(query);
+            resultset = preparedstatement.executeQuery(query);
+
+            while (resultset.next()){
+                cliente.addItem(resultset.getString("cedulacliente"));
+            }
+        } catch (SQLException e)  {
+            System.out.println("Fallamos al traer clientes 😦 " + e.getMessage());
         }
     }
 }

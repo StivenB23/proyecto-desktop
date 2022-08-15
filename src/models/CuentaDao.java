@@ -90,16 +90,11 @@ public class CuentaDao {
             while (resultset.next()) {
                 CuentaVo accountVo = new CuentaVo();
                 status = resultset.getBoolean("estado");
-                int account = resultset.getInt("numerocuenta");
-                if (account == numberAccount) {
-                    System.out.println(status);
-                    if (status == true) {
-                        inactivar(numberAccount);
-                    } else {
-                        activar(numberAccount);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null, "El número de cuenta no existe porfavor rectifiquelo");
+                System.out.println(status);
+                if (status == true) {
+                    inactivar(numberAccount);
+                } else {
+                    activar(numberAccount);
                 }
             }
         } catch (Exception e) {

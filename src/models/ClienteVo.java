@@ -9,7 +9,7 @@ package models;
  * @author Aprendiz
  */
 public class ClienteVo {
-    
+
     private Integer idcliente;
     private String cedulaCliente;
     private String nombre;
@@ -17,6 +17,17 @@ public class ClienteVo {
     private Boolean estado;
 
     public ClienteVo() {
+    }
+
+    public ClienteVo(Integer idcliente) {
+        this.idcliente = idcliente;
+    }
+
+    public ClienteVo(String cedulaCliente, String nombre, String telefono, Boolean estado) {
+        this.cedulaCliente = cedulaCliente;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.estado = estado;
     }
 
     public ClienteVo(Integer idcliente, String cedulaCliente, String nombre, String telefono, Boolean estado) {
