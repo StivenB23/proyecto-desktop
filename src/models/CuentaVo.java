@@ -13,16 +13,27 @@ public class CuentaVo {
     private String Titular;
     private double Saldo;
     private String FechaApertura;
+    private boolean Estado;
     private int IdCliente;
     
     public CuentaVo(){}
 
-    public CuentaVo(int IdCuenta, int NumeroCuenta, String Titular, double Saldo, String FechaApertura, int IdCliente) {
+    public CuentaVo(int NumeroCuenta, String Titular, double Saldo, String FechaApertura, boolean Estado, int IdCliente) {
+        this.NumeroCuenta = NumeroCuenta;
+        this.Titular = Titular;
+        this.Saldo = Saldo;
+        this.FechaApertura = FechaApertura;
+        this.Estado = Estado;
+        this.IdCliente = IdCliente;
+    }
+
+    public CuentaVo(int IdCuenta, int NumeroCuenta, String Titular, double Saldo, String FechaApertura, boolean Estado, int IdCliente) {
         this.IdCuenta = IdCuenta;
         this.NumeroCuenta = NumeroCuenta;
         this.Titular = Titular;
         this.Saldo = Saldo;
         this.FechaApertura = FechaApertura;
+        this.Estado = Estado;
         this.IdCliente = IdCliente;
     }
 
@@ -73,4 +84,14 @@ public class CuentaVo {
     public void setIdCliente(int IdCliente) {
         this.IdCliente = IdCliente;
     }
+
+    public boolean isEstado() {
+        return Estado;
+    }
+
+    public void setEstado(boolean Estado) {
+        this.Estado = Estado;
+    }
+    
+    
 }

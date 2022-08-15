@@ -50,7 +50,7 @@
                   <Component id="jLabelCedula" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                   <Component id="jTextFieldNumeroCuenta" alignment="0" min="-2" pref="406" max="-2" attributes="0"/>
                   <Component id="jLabelCedula1" min="-2" pref="51" max="-2" attributes="0"/>
-                  <Component id="jTextFieldTitularCuenta1" min="-2" pref="406" max="-2" attributes="0"/>
+                  <Component id="jTextFieldTitularCuenta" min="-2" pref="406" max="-2" attributes="0"/>
                   <Component id="jLabelCedula3" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                   <Component id="jTextFieldFechaCuenta" alignment="0" min="-2" pref="406" max="-2" attributes="0"/>
                   <Component id="jLabelCedula2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -88,7 +88,7 @@
                           <Component id="jLabelCedula1" min="-2" pref="36" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
-                              <Component id="jTextFieldTitularCuenta1" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jTextFieldTitularCuenta" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
@@ -231,7 +231,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldSaldoCuentaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldTitularCuenta1">
+    <Component class="javax.swing.JTextField" name="jTextFieldTitularCuenta">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="12" style="1"/>
@@ -260,29 +260,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaCuentaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="8b" red="0" type="rgb"/>
-        </Property>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="John"/>
-            <StringItem index="1" value="Andres"/>
-            <StringItem index="2" value="Stive"/>
-          </StringArray>
-        </Property>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="null"/>
-        </Property>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JButton" name="jButtonCuenta">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -302,6 +279,29 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCuentaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="8b" red="0" type="rgb"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="John"/>
+            <StringItem index="1" value="Andres"/>
+            <StringItem index="2" value="Stive"/>
+          </StringArray>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>

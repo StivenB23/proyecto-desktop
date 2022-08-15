@@ -26,19 +26,21 @@ public class CuentaDao {
     int root;
 
     public void save(CuentaVo cuenta) throws SQLException {
-        query = "INSERT INTO `cuenta`(`idcuenta`, `numerocuenta`, `titular`, `estado`, `fechaapertura`, `saldo`, `idcliente`) VALUES (?,?,?,?,?,?,?)";
+        query = "INSERT INTO `cuenta`(`numerocuenta`, `titular`, `estado`, `fechaapertura`, `saldo`, `idcliente`) VALUES (?,?,?,?,?,?)";
 
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
             preparedstatement.setInt(1, cuenta.getNumeroCuenta());
             preparedstatement.setString(2, cuenta.getTitular());
-            preparedstatement.setDouble(3, cuenta.getSaldo());
-            preparedstatement.setString(3, cuenta.getFechaApertura());
+            preparedstatement.setBoolean(3, cuenta.isEstado());
+            preparedstatement.setString(4, cuenta.getFechaApertura());
+            preparedstatement.setDouble(5, cuenta.getSaldo());
+            preparedstatement.setInt(6, cuenta.getIdCliente());
             preparedstatement.executeUpdate();
             preparedstatement.close();
         } catch (Exception e) {
-            System.out.println("Fallamas" + e.getMessage());
+            System.out.println("Fallamos" + e.getMessage());
         } finally {
             con.close();
         }

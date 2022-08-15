@@ -4,6 +4,12 @@
  */
 package views;
 
+import java.awt.HeadlessException;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import models.CuentaDao;
+import models.CuentaVo;
+
 /**
  *
  * @author andre
@@ -37,17 +43,16 @@ public class CuentaView extends javax.swing.JFrame {
         jLabelCedula4 = new javax.swing.JLabel();
         jTextFieldNumeroCuenta = new javax.swing.JTextField();
         jTextFieldSaldoCuenta = new javax.swing.JTextField();
-        jTextFieldTitularCuenta1 = new javax.swing.JTextField();
+        jTextFieldTitularCuenta = new javax.swing.JTextField();
         jTextFieldFechaCuenta = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jButtonCuenta = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
         setName("Cuentas"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
@@ -95,9 +100,9 @@ public class CuentaView extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldTitularCuenta1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jTextFieldTitularCuenta1.setForeground(new java.awt.Color(0, 139, 255));
-        jTextFieldTitularCuenta1.setCaretColor(new java.awt.Color(0, 139, 255));
+        jTextFieldTitularCuenta.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTextFieldTitularCuenta.setForeground(new java.awt.Color(0, 139, 255));
+        jTextFieldTitularCuenta.setCaretColor(new java.awt.Color(0, 139, 255));
 
         jTextFieldFechaCuenta.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTextFieldFechaCuenta.setForeground(new java.awt.Color(0, 139, 255));
@@ -107,11 +112,6 @@ public class CuentaView extends javax.swing.JFrame {
                 jTextFieldFechaCuentaActionPerformed(evt);
             }
         });
-
-        jComboBox1.setForeground(new java.awt.Color(0, 139, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "John", "Andres", "Stive" }));
-        jComboBox1.setBorder(null);
-        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButtonCuenta.setBackground(new java.awt.Color(0, 139, 255));
         jButtonCuenta.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -123,6 +123,11 @@ public class CuentaView extends javax.swing.JFrame {
                 jButtonCuentaActionPerformed(evt);
             }
         });
+
+        jComboBox1.setForeground(new java.awt.Color(0, 139, 255));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "John", "Andres", "Stive" }));
+        jComboBox1.setBorder(null);
+        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTable1.setForeground(new java.awt.Color(0, 139, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -161,7 +166,7 @@ public class CuentaView extends javax.swing.JFrame {
                     .addComponent(jLabelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTitularCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTitularCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCedula3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFechaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCedula2)
@@ -194,7 +199,7 @@ public class CuentaView extends javax.swing.JFrame {
                             .addComponent(jLabelCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
-                                .addComponent(jTextFieldTitularCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextFieldTitularCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(6, 6, 6)
                         .addComponent(jLabelCedula3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -226,7 +231,31 @@ public class CuentaView extends javax.swing.JFrame {
 
     private void jButtonCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCuentaActionPerformed
         // TODO add your handling code here:
+        registerAccount();
     }//GEN-LAST:event_jButtonCuentaActionPerformed
+
+    /**
+     *
+     */
+    public void registerAccount() {
+        int NumeroCuenta = Integer.parseInt(jTextFieldNumeroCuenta.getText());
+        String Titular = jTextFieldTitularCuenta.getText();
+        double Saldo = Double.parseDouble(jTextFieldSaldoCuenta.getText());
+        String FechaApertura = jTextFieldFechaCuenta.getText();
+        boolean Estado = true;
+        int idcliente = 1;
+
+        CuentaDao cuentadao = new CuentaDao();
+
+        CuentaVo cuenta = new CuentaVo(NumeroCuenta, Titular, Saldo, FechaApertura, Estado, idcliente);
+
+        try {
+            cuentadao.save(cuenta);
+            JOptionPane.showMessageDialog(null, "Registro");
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -279,6 +308,6 @@ public class CuentaView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldFechaCuenta;
     private javax.swing.JTextField jTextFieldNumeroCuenta;
     private javax.swing.JTextField jTextFieldSaldoCuenta;
-    private javax.swing.JTextField jTextFieldTitularCuenta1;
+    private javax.swing.JTextField jTextFieldTitularCuenta;
     // End of variables declaration//GEN-END:variables
 }

@@ -45,7 +45,6 @@ public class ClienteView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 555));
         setName("Cliente"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 555));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
@@ -95,6 +94,11 @@ public class ClienteView extends javax.swing.JFrame {
         jButtonCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButtonClienteMouseEntered(evt);
+            }
+        });
+        jButtonCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClienteActionPerformed(evt);
             }
         });
 
@@ -184,6 +188,10 @@ public class ClienteView extends javax.swing.JFrame {
     private void jButtonClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClienteMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonClienteMouseEntered
+
+    private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonClienteActionPerformed
 
     /**
      * @param args the command line arguments
