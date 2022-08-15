@@ -15,6 +15,7 @@ public class CuentaView extends javax.swing.JFrame {
      */
     public CuentaView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
