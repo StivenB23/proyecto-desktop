@@ -143,7 +143,7 @@ public class ClienteDao {
         }
     }
     public void delete(String cedula) throws SQLException {
-        query = "Delete from cliente WHERE cedula = " + cedula;
+        query = "Delete from cliente WHERE cedulacliente = " + cedula;
 
         try {
             con = Conexion.connection();

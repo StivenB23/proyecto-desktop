@@ -4,13 +4,14 @@
  */
 package views;
 
-import java.awt.Color;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import models.ClienteDao;
-import models.CuentaDao;
+import models.ClienteVo;
 
 /**
  *
@@ -18,12 +19,36 @@ import models.CuentaDao;
  */
 public class ClienteView extends javax.swing.JFrame {
 
+    DefaultTableModel modelo;
+
     /**
      * Creates new form ClienteView
      */
-    public ClienteView() {
+    public ClienteView() throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
+        modelo = new DefaultTableModel();
+        this.listar();
+    }
+
+    void listar() throws SQLException {
+        Object[] cliente = new Object[5];
+        modelo = (DefaultTableModel) jTableClientes.getModel();
+        ClienteDao clienteDao = new ClienteDao();
+        List<ClienteVo> clientes = clienteDao.list();
+        clientes.stream().forEach(client -> {
+            cliente[0] = client.getIdcliente();
+            cliente[1] = client.getCedulaCliente();
+            cliente[2] = client.getNombre();
+            cliente[3] = client.getTelefono();
+            if (client.getEstado() == true) {
+                cliente[4] = "Activo";
+            } else {
+                cliente[4] = "Inactivo";
+            }
+            modelo.addRow(cliente);
+        });
+        jTableClientes.setModel(modelo);
     }
 
     /**
@@ -46,7 +71,7 @@ public class ClienteView extends javax.swing.JFrame {
         jButtonCliente = new javax.swing.JButton();
         jTextFieldTelefonoCliente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableClientes = new javax.swing.JTable();
         jButtonDeleteClient = new javax.swing.JButton();
         jButtonEditClient = new javax.swing.JButton();
 
@@ -115,24 +140,21 @@ public class ClienteView extends javax.swing.JFrame {
         jTextFieldTelefonoCliente.setBorder(null);
         jTextFieldTelefonoCliente.setCaretColor(new java.awt.Color(26, 189, 203));
 
-        jTable1.setForeground(new java.awt.Color(0, 139, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableClientes.setForeground(new java.awt.Color(0, 139, 255));
+        jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "#", "Cédula", "Nombre", "Teléfono", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableClientes);
 
         jButtonDeleteClient.setBackground(new java.awt.Color(212, 0, 0));
         jButtonDeleteClient.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jButtonDeleteClient.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonDeleteClient.setText("Cambiar Estado");
+        jButtonDeleteClient.setText("Eliminar Cliente");
         jButtonDeleteClient.setBorder(null);
         jButtonDeleteClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,15 +249,23 @@ public class ClienteView extends javax.swing.JFrame {
 
     private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
         // TODO add your handling code here:
+        try {
+// TODO add your handling code here:
+            registerClient();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonClienteActionPerformed
 
     private void jButtonDeleteClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteClientActionPerformed
         // TODO add your handling code here:
         String cedula = JOptionPane.showInputDialog("Ingrese el numero de cuenta para eliminarla", null);
-        try{
+        try {
             ClienteDao clienteDao = new ClienteDao();
             clienteDao.delete(cedula);
-        }catch(Exception e){
+            this.clearTable();
+            this.listar();
+        } catch (Exception e) {
             System.out.print(e);
         }
     }//GEN-LAST:event_jButtonDeleteClientActionPerformed
@@ -247,11 +277,48 @@ public class ClienteView extends javax.swing.JFrame {
         ClienteDao clienteDao = new ClienteDao();
         try {
             clienteDao.changeStatus(cedula);
+            this.clearTable();
+            this.listar();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "El número de cuenta no existe");
-            Logger.getLogger(CuentaView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(CuentaView.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonEditClientActionPerformed
+
+    public void registerClient() throws SQLException {
+        if (!jTextFieldCedulaCliente.getText().isEmpty()
+                && !jTextFieldNombre.getText().isEmpty()
+                && !jTextFieldTelefonoCliente.getText().isEmpty()) {
+            String CedulaCliente = jTextFieldCedulaCliente.getText();
+            String Nombre = jTextFieldNombre.getText();
+            String Telefono = jTextFieldTelefonoCliente.getText();
+            boolean Estado = true;
+
+            ClienteDao clientedao = new ClienteDao();
+
+            ClienteVo cliente = new ClienteVo(CedulaCliente, Nombre, Telefono, Estado);
+
+            try {
+                clientedao.save(cliente);
+                JOptionPane.showMessageDialog(null, "Registro");
+                this.clearTable();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Los Campos no pueden estar vacios. Porfavor llenelos");
+        }
+        this.listar();
+    }
+
+    void clearTable() {
+        for (int i = 0; i < jTableClientes.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i = i - 1;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -267,23 +334,35 @@ public class ClienteView extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClienteView().setVisible(true);
+                try {
+                    new ClienteView().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClienteView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -299,7 +378,7 @@ public class ClienteView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCedula2;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableClientes;
     private javax.swing.JTextField jTextFieldCedulaCliente;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldTelefonoCliente;

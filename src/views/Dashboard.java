@@ -97,7 +97,12 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButtonGestionarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionarClientesActionPerformed
         // TODO add your handling code here:
         super.setVisible(false);
-        ClienteView clienteView = new ClienteView();
+        ClienteView clienteView = null;
+        try {
+            clienteView = new ClienteView();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         clienteView.setVisible(true);
     }//GEN-LAST:event_jButtonGestionarClientesActionPerformed
 

@@ -11,8 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.ClienteDao;
+import models.ClienteVo;
 import models.CuentaDao;
 import models.CuentaVo;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -21,6 +24,8 @@ import models.CuentaVo;
 public class CuentaView extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
+    ClienteVo clienteVo = new ClienteVo();
+    ClienteDao clienteDao = new ClienteDao();
 
     /**
      * Creates new form CuentaView
@@ -29,6 +34,8 @@ public class CuentaView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         modelo = new DefaultTableModel();
+        AutoCompleteDecorator.decorate(jComboBoxCliente);
+        clienteDao.consultClient(jComboBoxCliente);
         this.listar();
     }
 
@@ -75,7 +82,7 @@ public class CuentaView extends javax.swing.JFrame {
         jTextFieldTitularCuenta = new javax.swing.JTextField();
         jTextFieldFechaCuenta = new javax.swing.JTextField();
         jButtonDeleteAccount = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxCliente = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCuentas = new javax.swing.JTable();
         jButtonCuenta1 = new javax.swing.JButton();
@@ -155,10 +162,9 @@ public class CuentaView extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setForeground(new java.awt.Color(0, 139, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "John", "Andres", "Stive" }));
-        jComboBox1.setBorder(null);
-        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jComboBoxCliente.setForeground(new java.awt.Color(0, 139, 255));
+        jComboBoxCliente.setBorder(null);
+        jComboBoxCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTableCuentas.setForeground(new java.awt.Color(0, 139, 255));
         jTableCuentas.setModel(new javax.swing.table.DefaultTableModel(
@@ -224,7 +230,7 @@ public class CuentaView extends javax.swing.JFrame {
                             .addComponent(jLabelCedula2)
                             .addComponent(jTextFieldSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelCedula4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(48, 48, 48)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -269,7 +275,7 @@ public class CuentaView extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jLabelCedula4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -289,12 +295,12 @@ public class CuentaView extends javax.swing.JFrame {
 
     private void jButtonDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteAccountActionPerformed
         int inputNumberAccount = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de cuenta para eliminarla", null));
-        try{
+        try {
             CuentaDao cuentaDao = new CuentaDao();
             cuentaDao.delete(inputNumberAccount);
             this.clearTable();
             this.listar();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.print(e);
         }
     }//GEN-LAST:event_jButtonDeleteAccountActionPerformed
@@ -407,7 +413,7 @@ public class CuentaView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonChangeStatus;
     private javax.swing.JButton jButtonCuenta1;
     private javax.swing.JButton jButtonDeleteAccount;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxCliente;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
