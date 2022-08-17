@@ -150,4 +150,65 @@ public class CuentaDao {
             con.close();
         }
     }
+    
+    public ArrayList<CuentaVo> getCuentaVo() {
+
+        query = "SELECT * FROM cuenta";
+
+        ArrayList<CuentaVo> listAccounts = new ArrayList<>();
+
+        try {
+            con = Conexion.connection();
+            preparedstatement = con.prepareStatement(query);
+            resultset = preparedstatement.executeQuery(query);
+
+            while (resultset.next()) {
+                CuentaVo cuentarow = new CuentaVo();
+
+                cuentarow.setIdCuenta(resultset.getInt("idcuenta"));
+                cuentarow.setNumeroCuenta(resultset.getInt("numerocuenta"));
+                cuentarow.setTitular(resultset.getString("titular"));
+                cuentarow.setEstado(resultset.getBoolean("estado"));
+                cuentarow.setSaldo(resultset.getDouble("saldo"));
+                cuentarow.setFechaApertura(resultset.getString("fechaapertura"));
+                cuentarow.setIdCliente(resultset.getInt("idcliente"));
+
+                listAccounts.add(cuentarow);
+            }
+        } catch (Exception e) {
+            System.out.println("Fallamos al traer clientes 😦 " + e.getMessage());
+
+        }
+        return listAccounts;
+    }
+    
+    public void deposit(int numberAccount, double saldo) throws SQLException {
+        query = "UPDATE cuenta SET saldo = '" + saldo + "' WHERE numerocuenta = " + numberAccount;
+
+        try {
+            con = Conexion.connection();
+            preparedstatement = con.prepareStatement(query);
+            preparedstatement.executeUpdate();
+            preparedstatement.close();
+        } catch (Exception e) {
+            System.out.println("Fallamos" + e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
+    
+    public void retirar(int numberAccount, double saldo) throws SQLException {
+        query = "UPDATE cuenta SET saldo = '" + saldo + "' WHERE numerocuenta = " + numberAccount;
+
+        try {
+            con = Conexion.connection();
+            preparedstatement = con.prepareStatement(query);
+            preparedstatement.executeUpdate();
+            preparedstatement.close();
+        } catch (Exception e) {
+            System.out.println("Fallamos" + e.getMessage());
+        } finally {
+            con.close();
+        }
+    }
 }

@@ -18,6 +18,13 @@ public class CuentaVo {
     
     public CuentaVo(){}
 
+    public CuentaVo(int IdCuenta, int NumeroCuenta, String Titular, double Saldo) {
+        this.IdCuenta = IdCuenta;
+        this.NumeroCuenta = NumeroCuenta;
+        this.Titular = Titular;
+        this.Saldo = Saldo;
+    }
+
     public CuentaVo(int NumeroCuenta, String Titular, double Saldo, String FechaApertura, boolean Estado, int IdCliente) {
         this.NumeroCuenta = NumeroCuenta;
         this.Titular = Titular;
@@ -91,7 +98,10 @@ public class CuentaVo {
 
     public void setEstado(boolean Estado) {
         this.Estado = Estado;
+    }  
+    
+    @Override
+    public String toString() {
+        return NumeroCuenta + " - " + Titular;
     }
-    
-    
 }

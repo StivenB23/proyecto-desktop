@@ -36,22 +36,28 @@
               <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabelCedula2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelNombre" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelCedula" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldCedulaCliente" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jTextFieldNombre" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jTextFieldTelefonoCliente" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButtonCliente" pref="374" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabelCedula2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelNombre" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelCedula" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldCedulaCliente" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTextFieldNombre" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTextFieldTelefonoCliente" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButtonCliente" pref="374" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="430" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="431" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="428" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Component id="jButtonDeleteClient" min="-2" pref="152" max="-2" attributes="0"/>
@@ -69,6 +75,7 @@
                   <Component id="jLabel2" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jButtonDeleteClient" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   <Component id="jButtonEditClient" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -330,6 +337,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditClientActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Volver"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

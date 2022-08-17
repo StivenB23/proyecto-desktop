@@ -74,6 +74,7 @@ public class ClienteView extends javax.swing.JFrame {
         jTableClientes = new javax.swing.JTable();
         jButtonDeleteClient = new javax.swing.JButton();
         jButtonEditClient = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 555));
@@ -172,6 +173,14 @@ public class ClienteView extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,20 +192,24 @@ public class ClienteView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(176, 176, 176))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelCedula2)
-                    .addComponent(jLabelNombre)
-                    .addComponent(jLabelCedula)
-                    .addComponent(jTextFieldCedulaCliente)
-                    .addComponent(jTextFieldNombre)
-                    .addComponent(jTextFieldTelefonoCliente)
-                    .addComponent(jButtonCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabelCedula2)
+                        .addComponent(jLabelNombre)
+                        .addComponent(jLabelCedula)
+                        .addComponent(jTextFieldCedulaCliente)
+                        .addComponent(jTextFieldNombre)
+                        .addComponent(jTextFieldTelefonoCliente)
+                        .addComponent(jButtonCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(317, 317, 317)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(431, 431, 431)
+                .addGap(428, 428, 428)
                 .addComponent(jLabel2)
                 .addGap(64, 64, 64)
                 .addComponent(jButtonDeleteClient, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,7 +224,8 @@ public class ClienteView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonDeleteClient, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditClient, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonEditClient, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,6 +300,18 @@ public class ClienteView extends javax.swing.JFrame {
                             .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonEditClientActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        super.setVisible(false);
+        Dashboard dashboard = null;
+        try {
+            dashboard = new Dashboard();
+        } catch (Exception ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dashboard.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void registerClient() throws SQLException {
         if (!jTextFieldCedulaCliente.getText().isEmpty()
@@ -368,6 +394,7 @@ public class ClienteView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCliente;
     private javax.swing.JButton jButtonDeleteClient;
     private javax.swing.JButton jButtonEditClient;
