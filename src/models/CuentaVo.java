@@ -8,7 +8,7 @@ package models;
  * @author andre
  */
 public class CuentaVo {
-    private int IdCuenta;
+    int IdCuenta;
     private int NumeroCuenta;
     private String Titular;
     private double Saldo;

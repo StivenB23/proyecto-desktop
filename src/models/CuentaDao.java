@@ -150,19 +150,4 @@ public class CuentaDao {
             con.close();
         }
     }
-
-//    public void deposit (int id, int saldo) throws SQLException{
-//        
-//        query = "UPDATE cuenta SET saldo = '"+ saldo +"' WHERE idcuenta = " + id;
-//        try {
-//            con = Conexion.connection();
-//            preparedstatement = con.prepareStatement(query);
-//            preparedstatement.executeUpdate();
-//            preparedstatement.close();
-//        } catch (Exception e) {
-//            System.out.println("Fallamos" + e.getMessage());
-//        } finally {
-//            con.close();
-//        }
-//    }
 }

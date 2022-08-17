@@ -4,7 +4,6 @@
  */
 package models;
 
-
 import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,7 +62,7 @@ public class ClienteDao {
                 clienterow.setNombre(resultset.getString("nombre"));
                 clienterow.setTelefono(resultset.getString("telefono"));
                 clienterow.setEstado(resultset.getBoolean("estado"));
-                
+
                 listaCliente.add(clienterow);
             }
             preparedstatement.close();
@@ -72,8 +71,9 @@ public class ClienteDao {
         } finally {
             con.close();
         }
-        return listaCliente; 
+        return listaCliente;
     }
+
     public boolean changeStatus(String cedula) throws SQLException {
         query = "SELECT * FROM `cliente` WHERE cedulaCliente =" + cedula;
         boolean status = false;
@@ -99,9 +99,10 @@ public class ClienteDao {
         preparedstatement.close();
         return status;
     }
-    public void inactivar (String cedula) throws SQLException{
+
+    public void inactivar(String cedula) throws SQLException {
         query = "UPDATE cliente SET estado = 0 WHERE cedulaCliente = " + cedula;
-        
+
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
@@ -113,10 +114,10 @@ public class ClienteDao {
             con.close();
         }
     }
-    
-    public void activar (String cedula) throws SQLException{
+
+    public void activar(String cedula) throws SQLException {
         query = "UPDATE cliente SET estado = 1 WHERE cedulaCliente = " + cedula;
-        
+
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
@@ -128,9 +129,9 @@ public class ClienteDao {
             con.close();
         }
     }
-    
-    public void update (Integer id, String nombre, String telefono) throws SQLException{
-        query = "UPDATE cliente SET nombre = '"+ nombre +"' telefono = '"+ telefono +"' WHERE idcliente = " + id;
+
+    public void update(Integer id, String nombre, String telefono) throws SQLException {
+        query = "UPDATE cliente SET nombre = '" + nombre + "' telefono = '" + telefono + "' WHERE idcliente = " + id;
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
@@ -142,6 +143,7 @@ public class ClienteDao {
             con.close();
         }
     }
+
     public void delete(String cedula) throws SQLException {
         query = "Delete from cliente WHERE cedulacliente = " + cedula;
 
@@ -156,19 +158,33 @@ public class ClienteDao {
             con.close();
         }
     }
-    public void consultClient(JComboBox cliente) throws SQLException {
-        query = "SELECT cedulacliente FROM cliente";
+
+    public ArrayList<ClienteVo> getClienteVo() {
+
+        query = "SELECT * FROM cliente";
+
+        ArrayList<ClienteVo> listClients = new ArrayList<>();
 
         try {
             con = Conexion.connection();
             preparedstatement = con.prepareStatement(query);
             resultset = preparedstatement.executeQuery(query);
 
-            while (resultset.next()){
-                cliente.addItem(resultset.getString("cedulacliente"));
+            while (resultset.next()) {
+                ClienteVo cliente = new ClienteVo();
+
+                cliente.setIdcliente(resultset.getInt("idcliente"));
+                cliente.setCedulaCliente(resultset.getString("cedulacliente"));
+                cliente.setNombre(resultset.getString("nombre"));
+                cliente.setTelefono(resultset.getString("telefono"));
+                cliente.setEstado(resultset.getBoolean("estado"));
+
+                listClients.add(cliente);
             }
-        } catch (SQLException e)  {
+        } catch (Exception e) {
             System.out.println("Fallamos al traer clientes 😦 " + e.getMessage());
+
         }
+        return listClients;
     }
 }

@@ -34,6 +34,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonGestionarClientes = new javax.swing.JButton();
         jButtonGestionarCuentas = new javax.swing.JButton();
+        jButtonManejoCuentas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +64,17 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        jButtonManejoCuentas.setBackground(new java.awt.Color(0, 139, 255));
+        jButtonManejoCuentas.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jButtonManejoCuentas.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonManejoCuentas.setText("Manejo Cuentas");
+        jButtonManejoCuentas.setBorder(null);
+        jButtonManejoCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonManejoCuentasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,7 +85,8 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGap(125, 125, 125)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonGestionarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonGestionarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButtonGestionarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonManejoCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(323, 323, 323)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -86,9 +99,11 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jButtonGestionarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
+                .addGap(60, 60, 60)
                 .addComponent(jButtonGestionarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addComponent(jButtonManejoCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,6 +132,18 @@ public class Dashboard extends javax.swing.JFrame {
         }
         cuentaView.setVisible(true);
     }//GEN-LAST:event_jButtonGestionarCuentasActionPerformed
+
+    private void jButtonManejoCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManejoCuentasActionPerformed
+        // TODO add your handling code here:
+        super.setVisible(false);
+        ManejoCuenta manejoCuenta = null;
+        try {
+            manejoCuenta = new ManejoCuenta();
+        } catch(Exception e){
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, e);
+        }
+        manejoCuenta.setVisible(true);
+    }//GEN-LAST:event_jButtonManejoCuentasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,6 +183,7 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGestionarClientes;
     private javax.swing.JButton jButtonGestionarCuentas;
+    private javax.swing.JButton jButtonManejoCuentas;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

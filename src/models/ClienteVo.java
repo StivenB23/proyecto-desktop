@@ -19,8 +19,10 @@ public class ClienteVo {
     public ClienteVo() {
     }
 
-    public ClienteVo(Integer idcliente) {
+    public ClienteVo(Integer idcliente, String cedulaCliente, String nombre) {
         this.idcliente = idcliente;
+        this.cedulaCliente = cedulaCliente;
+        this.nombre = nombre;
     }
 
     public ClienteVo(String cedulaCliente, String nombre, String telefono, Boolean estado) {
@@ -76,5 +78,10 @@ public class ClienteVo {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return cedulaCliente + " - " + nombre;
     }
 }

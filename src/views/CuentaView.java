@@ -4,8 +4,8 @@
  */
 package views;
 
-import java.awt.HeadlessException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +15,6 @@ import models.ClienteDao;
 import models.ClienteVo;
 import models.CuentaDao;
 import models.CuentaVo;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -34,9 +33,19 @@ public class CuentaView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         modelo = new DefaultTableModel();
-        AutoCompleteDecorator.decorate(jComboBoxCliente);
-        clienteDao.consultClient(jComboBoxCliente);
+        showClients();
         this.listar();
+    }
+
+    private void showClients() {
+        ClienteDao clienteDao = new ClienteDao();
+        ArrayList<ClienteVo> listClients = clienteDao.getClienteVo();
+
+        jComboBoxCliente.removeAllItems();
+
+        for (int i = 0; i < listClients.size(); i++) {
+            jComboBoxCliente.addItem(new ClienteVo(listClients.get(i).getIdcliente(), listClients.get(i).getCedulaCliente(), listClients.get(i).getNombre()));
+        }
     }
 
     void listar() throws SQLException {
@@ -123,7 +132,7 @@ public class CuentaView extends javax.swing.JFrame {
 
         jLabelCedula4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabelCedula4.setForeground(new java.awt.Color(0, 64, 222));
-        jLabelCedula4.setText("id del Cliente");
+        jLabelCedula4.setText("Cliente");
 
         jTextFieldNumeroCuenta.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTextFieldNumeroCuenta.setForeground(new java.awt.Color(0, 139, 255));
@@ -176,6 +185,11 @@ public class CuentaView extends javax.swing.JFrame {
             }
         ));
         jTableCuentas.setSelectionForeground(new java.awt.Color(0, 139, 255));
+        jTableCuentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCuentasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableCuentas);
 
         jButtonCuenta1.setBackground(new java.awt.Color(0, 139, 255));
@@ -330,6 +344,27 @@ public class CuentaView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonChangeStatusActionPerformed
 
+    private void jTableCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCuentasMouseClicked
+        // TODO add your handling code here:
+        int fila = jTableCuentas.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Cuenta no Seleccionada");
+        } else {
+            int id = Integer.parseInt((String)jTableCuentas.getValueAt(fila, 0).toString());
+            String cuenta = (String) jTableCuentas.getValueAt(fila, 1);
+            String titular = (String) jTableCuentas.getValueAt(fila, 2);
+            String fecha = (String) jTableCuentas.getValueAt(fila, 3);
+            String saldo = (String) jTableCuentas.getValueAt(fila, 4);
+            
+            JOptionPane.showMessageDialog(null, id);
+            jTextFieldNumeroCuenta.setText(cuenta);
+            jTextFieldTitularCuenta.setText(titular);
+            jTextFieldFechaCuenta.setText(fecha);
+            jTextFieldSaldoCuenta.setText(saldo);
+        }
+    }//GEN-LAST:event_jTableCuentasMouseClicked
+
     /**
      *
      */
@@ -351,7 +386,7 @@ public class CuentaView extends javax.swing.JFrame {
             double Saldo = Double.parseDouble(jTextFieldSaldoCuenta.getText());
             String FechaApertura = jTextFieldFechaCuenta.getText();
             boolean Estado = true;
-            int idCliente = 1;
+            int idCliente = jComboBoxCliente.getItemAt(jComboBoxCliente.getSelectedIndex()).getIdcliente();
 
             CuentaDao cuentadao = new CuentaDao();
 
@@ -413,7 +448,7 @@ public class CuentaView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonChangeStatus;
     private javax.swing.JButton jButtonCuenta1;
     private javax.swing.JButton jButtonDeleteAccount;
-    private javax.swing.JComboBox<String> jComboBoxCliente;
+    private javax.swing.JComboBox<ClienteVo> jComboBoxCliente;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
